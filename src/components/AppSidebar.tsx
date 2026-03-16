@@ -1,4 +1,4 @@
-import { MessageSquarePlus, MessagesSquare, Library, Settings, Search, Trash2, MessageCircle } from "lucide-react";
+import { MessageSquarePlus, MessagesSquare, Search, Trash2, MessageCircle } from "lucide-react";
 import type { Conversation } from "@/pages/Index";
 
 interface SidebarProps {

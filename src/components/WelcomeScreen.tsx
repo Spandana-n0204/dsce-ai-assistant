@@ -1,22 +1,35 @@
-import aiOrb from "@/assets/ai-orb.png";
+import { GraduationCap, IndianRupee, Building2, BookOpen, Award, FileText } from "lucide-react";
 
-export function WelcomeScreen() {
+const shortcuts = [
+  { label: "KCET Admission", icon: GraduationCap },
+  { label: "Fee Structure", icon: IndianRupee },
+  { label: "Hostel Info", icon: Building2 },
+  { label: "Courses Offered", icon: BookOpen },
+  { label: "Scholarships", icon: Award },
+  { label: "Required Documents", icon: FileText },
+];
+
+interface WelcomeScreenProps {
+  onShortcut?: (text: string) => void;
+}
+
+export function WelcomeScreen({ onShortcut }: WelcomeScreenProps) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center gap-6 px-4">
-      <div className="w-32 h-32 relative">
-        <img src={aiOrb} alt="AI Orb" className="w-full h-full object-contain drop-shadow-[0_0_30px_hsl(var(--primary)/0.5)]" />
-      </div>
-      <div className="text-center space-y-3">
-        <h2 className="text-3xl font-bold text-foreground">Ready to Ask Something?</h2>
-        <p className="text-muted-foreground max-w-md">
-          DSCE HelpDesk AI can answer questions about admissions, courses, fees, and campus information.
-        </p>
-      </div>
-      <div className="flex gap-3 mt-4">
-        {["Admissions", "Courses", "Fees", "Campus"].map((tag) => (
-          <span key={tag} className="px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-            {tag}
-          </span>
+    <div className="flex-1 flex flex-col items-center justify-center gap-8 px-4">
+      <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight text-center">
+        What's on your mind today?
+      </h2>
+
+      <div className="flex flex-wrap justify-center gap-2.5 max-w-2xl mt-4">
+        {shortcuts.map((s) => (
+          <button
+            key={s.label}
+            onClick={() => onShortcut?.(s.label)}
+            className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-secondary text-muted-foreground border border-border hover:bg-sidebar-hover hover:text-foreground transition-all duration-200 cursor-pointer"
+          >
+            <s.icon className="w-3.5 h-3.5" />
+            {s.label}
+          </button>
         ))}
       </div>
     </div>

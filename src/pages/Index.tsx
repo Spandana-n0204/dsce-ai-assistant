@@ -43,9 +43,9 @@ const Index = () => {
     <div className="flex h-screen w-full overflow-hidden bg-background">
       <AppSidebar onNewChat={handleNewChat} />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 dark:grid-bg grid-bg-light">
         {/* Header */}
-        <header className="flex items-center justify-between px-6 py-3 border-b border-border">
+        <header className="flex items-center justify-between px-6 py-3 border-b border-border/50">
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-muted-foreground">DSCE HelpDesk AI</span>
             <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary">BETA</span>
@@ -57,7 +57,7 @@ const Index = () => {
         {hasMessages ? (
           <ChatMessages messages={messages} loading={loading} />
         ) : (
-          <WelcomeScreen />
+          <WelcomeScreen onShortcut={handleSend} />
         )}
 
         <ChatInput onSend={handleSend} disabled={loading} />

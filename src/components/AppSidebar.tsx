@@ -1,4 +1,4 @@
-import { MessageSquarePlus, MessagesSquare, Library, Settings, Search, Trash2, MessageCircle } from "lucide-react";
+import { MessageSquarePlus, MessagesSquare, Search, Trash2, MessageCircle } from "lucide-react";
 import type { Conversation } from "@/pages/Index";
 
 interface SidebarProps {
@@ -12,8 +12,6 @@ interface SidebarProps {
 const navItems = [
   { icon: MessageSquarePlus, label: "New Chat", action: "new" },
   { icon: MessagesSquare, label: "Chat History", action: "history" },
-  { icon: Library, label: "Library", action: "library" },
-  { icon: Settings, label: "Settings", action: "settings" },
 ];
 
 export function AppSidebar({

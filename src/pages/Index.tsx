@@ -16,14 +16,19 @@ const DEVICE_ID = (() => {
 })();
 
 export interface Conversation {
-  id: string;
-  title: string;
+  id:         string;
+  title:      string;
   created_at?: string;
 }
 
+interface StoredMessage {
+  role:    string;
+  content: string;
+}
+
 const Index = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [messages,      setMessages]      = useState<Message[]>([]);
+  const [loading,       setLoading]       = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [conversations, setConversations] = useState<Conversation[]>([]);
 
@@ -49,12 +54,12 @@ const Index = () => {
 
     try {
       const res = await fetch(`${API_BASE}/chat`, {
-        method: "POST",
+        method:  "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          question: text,
+          question:        text,
           conversation_id: conversationId,
-          device_id: DEVICE_ID,
+          device_id:       DEVICE_ID,
         }),
       });
       const data = await res.json();
@@ -83,9 +88,9 @@ const Index = () => {
       const res = await fetch(`${API_BASE}/conversations/${id}/messages`);
       if (res.ok) {
         const data = await res.json();
-        const loaded: Message[] = data.map((m: any) => ({
-          role: m.role === "user" ? "user" : "ai",
-          content: m.content || m.answer || m.question || "",
+        const loaded: Message[] = data.map((m: StoredMessage) => ({
+          role:    m.role === "user" ? "user" : "ai",
+          content: m.content || "",
         }));
         setMessages(loaded);
         setConversationId(id);
